@@ -1,0 +1,32 @@
+# --- secrets — NEVER commit -------------------------------------------------
+.env
+*.env
+!requirements.txt
+secrets/
+
+# --- python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+.venv/
+venv/
+*.log
+
+# --- tooling / OS ------------------------------------------------------------
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.idea/
+.vscode/
+Desktop.ini
+Thumbs.db
+.tmp/
+
+# --- local-only (kept on disk, never committed) ---------------------------
+AGENT.md
+examples/
+_archive/

@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aicore"
+version = "4.0.0"
+description = "AICORE shared library: model resolution, AI request audit history, shared /health endpoint, and a DB Access API client (query/execute)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "SKMCHRC" }]
+keywords = ["aicore", "llm", "fastapi", "health", "audit"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Framework :: FastAPI",
+    "Intended Audience :: Developers",
+]
+# The only hard dependency. (starlette/fastapi are used lazily and are already
+# present in any web app that mounts the health endpoint.)
+dependencies = [
+    "requests>=2.28",
+]
+
+[project.optional-dependencies]
+direct-db = ["oracledb>=2.0"]  # only for the internal aicore.db direct-Oracle path
+web = ["fastapi>=0.100"]      # convenience: health endpoint + starlette-aware errors
+dev = ["fastapi>=0.100", "uvicorn", "httpx", "python-multipart"]
+
+[project.scripts]
+aicore = "aicore.cli:main"
+
+[tool.setuptools]
+# Ship exactly one package (the `aicore/` directory) — NOT examples/ or _archive/.
+packages = ["aicore"]
+
+[tool.setuptools.package-data]
+aicore = ["SKILL.md"]
